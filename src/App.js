@@ -1,25 +1,36 @@
-import logo from './logo.svg';
-import './App.css';
+import "./App.css";
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
-}
+import React, { useState, useRef } from "react";
+import ProblemList from "./ProblemList";
+import FormContainer from "./FormContainer";
+import TestResults from "./TestResults"
+
+const App = () => {
+    const [selectedProblem, setSelectedProblem] = useState(null);
+    const [selectedLanguage, setSelectedLanguage] = useState("Python");
+    const codeRef = useRef(null);
+
+    // const handleProblemSelect = (problem) => {
+    //     setSelectedProblem(problem);
+    // };
+
+    return (
+        <div className="App">
+            <div className="main-container">
+                <ProblemList
+                    selectedProblem={selectedProblem}
+                    setSelectedProblem={setSelectedProblem}
+                />
+                <FormContainer
+                    setSelectedLanguage={setSelectedLanguage}
+                    selectedLanguage={selectedLanguage}
+                    codeRef={codeRef}
+                    selectedProblem={selectedProblem}
+                />
+            </div>
+            <TestResults></TestResults>
+        </div>
+    );
+};
 
 export default App;
